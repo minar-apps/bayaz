@@ -23,6 +23,9 @@ header.top{position:sticky;top:0;z-index:5;background:#14532d;color:#fff;padding
 header.top::before{content:"";position:absolute;inset:0;z-index:-1;background:url(header-script.png) 0 0/auto 170px repeat;opacity:.6;pointer-events:none}
 @media (prefers-color-scheme:dark){header.top{background:#174f2f}}
 .hback{background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.35);color:#fff;border-radius:8px;padding:2px 10px;font-size:15px;cursor:pointer;align-self:center}
+.hguide{color:#fff;font-size:13px;margin-left:10px;border:1px solid rgba(255,255,255,.4);border-radius:8px;padding:1px 9px;text-decoration:none;align-self:center}
+#totop{position:fixed;right:calc(16px + env(safe-area-inset-right));bottom:calc(20px + env(safe-area-inset-bottom));z-index:6;width:48px;height:48px;border-radius:50%;border:0;background:#14532d;color:#fff;font-size:22px;line-height:48px;box-shadow:0 3px 10px rgba(0,0,0,.3);cursor:pointer;opacity:.92}
+@media print{#totop{display:none!important}}
 .hit{background:var(--brand2);border-radius:8px;padding:6px 8px;margin-top:6px;font-size:14px}
 .hit .ur{font-size:21px;line-height:2}
 .unit.found{outline:2px solid var(--gold);outline-offset:4px;border-radius:6px}
@@ -94,11 +97,12 @@ textarea{width:100%;height:46vh;font:14px/1.6 ui-monospace,Menlo,monospace;borde
 </head>
 <body>
 <header class="top">
-  <div class="brand"><button class="hback" id="hb" hidden onclick="event.stopPropagation();history.length>1?history.back():location.hash=''">‹ Back</button><b onclick="location.hash=''">Bayaz</b><span onclick="location.hash=''">بیاض</span><small id="ver"></small></div>
+  <div class="brand"><button class="hback" id="hb" hidden onclick="event.stopPropagation();history.length>1?history.back():location.hash=''">‹ Back</button><b onclick="location.hash=''">Bayaz</b><span onclick="location.hash=''">بیاض</span><small id="ver"></small><a class="hguide" href="guide/" onclick="event.stopPropagation()">Guide</a></div>
   <input id="q" type="search" placeholder="Search any word — Urdu, roman, English" autocomplete="off">
 </header>
 <main id="app">Loading…</main>
 <div id="print"></div>
+<button id="totop" hidden aria-label="Back to top" title="Back to top">↑</button>
 <dialog id="dlg"><h2>Export text</h2><textarea id="txt" readonly></textarea>
   <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap"><button class="b p" id="copy">Copy</button><button class="b" id="dl">Download .txt</button><button class="b" onclick="dlg.close()">Close</button></div></dialog>
 <script>
@@ -118,6 +122,7 @@ const cls=(n,line)=>isAr(n,line)?"ar":"ur";
 const stLabel={official:"Official translation",["unofficial-draft"]:"Unofficial translation — check before presenting or publishing",none:"No translation yet"};
 fetch("data/bayaz.json").then(r=>r.json()).then(d=>{D=d;D.nazms.forEach(n=>{n.units.forEach(u=>u._s=nrm([...u.u,...u.r,u.ut||"",...u.e,u.note||""].join(" ")));n._s=nrm([n.t,n.tu,...(n.also||[]).flatMap(a=>[a.t,a.tu]),n.poet,n.poetU,n.themes.map(t=>D.themes[t]).join(" "),n.source&&n.source.book,n.source&&n.source.originalWork].join(" "))+" "+n.units.map(u=>u._s).join(" ")});$("#ver").textContent=D.nazms.length+" nazams";route()}).catch(e=>{$("#app").textContent="Could not load data: "+e});
 addEventListener("hashchange",route);
+const tt=$("#totop");addEventListener("scroll",()=>{tt.hidden=scrollY<700},{passive:true});tt.onclick=()=>window.scrollTo({top:0,behavior:"smooth"});
 $("#q").addEventListener("input",e=>{S.q=e.target.value;if(location.hash.startsWith("#/n/"))location.hash="";else list()});
 function route(){const m=location.hash.match(/^#\/n\/(.+)$/);if(m){const n=D.nazms.find(x=>x.slug===decodeURIComponent(m[1]));if(n){detail(n);return}}list()}
 function filtered(){const q=qWords();let a=D.nazms.filter(n=>(!S.theme||n.themes.includes(S.theme))&&(!S.poet||n.poet===S.poet)&&(!S.lang||n.lang===S.lang)&&(!S.level||(S.level==="official"?n.units.some(u=>u.st==="official"):n.level===S.level))&&q.every(w=>n._s.includes(w)));

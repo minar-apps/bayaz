@@ -40,7 +40,7 @@ footer{color:var(--mute);font-size:14px;border-top:1px solid var(--line);padding
 
 <header class="hero"><div class="in">
 <h1>How to use Bayaz <span>بیاض</span></h1>
-<p>A step-by-step guide for murabbis: find a nazam, choose the couplets you need for an ijlas, and take them away as text or PDF in Urdu, transliteration and English.</p>
+<p>A step-by-step guide for murabbis: find a nazam, choose the couplets you need for an ijlas, and take them away as text or PDF in Urdu, transliteration and English.</p><p><a href="https://mustjabq15-hue.github.io/bayaz/" style="color:#fff;font-weight:600">Open Bayaz → mustjabq15-hue.github.io/bayaz/</a></p>
 </div></header>
 
 <div class="wrap">
@@ -52,58 +52,59 @@ footer{color:var(--mute);font-size:14px;border-top:1px solid var(--line);padding
 <section class="step" id="phone" style="display:block">
 <div class="k">Step 9</div><h2>Keep it on your iPhone</h2>
 <ol class="marks">
-<li><span class="n">1</span><div>Open the Bayaz link in <b>Safari</b>.</div></li>
+<li><span class="n">1</span><div>Open <b>https://mustjabq15-hue.github.io/bayaz/</b> in <b>Safari</b>.</div></li>
 <li><span class="n">2</span><div>Tap the <b>Share</b> button (square with an arrow), then <b>Add to Home Screen</b>.</div></li>
 <li><span class="n">3</span><div>Bayaz now opens like an app and works without internet after the first visit.</div></li>
 </ol>
-<div class="tip w"><b>For now:</b> the app is not on GitHub yet, so use the preview link. The preview cannot download files or print; those two buttons appear once it is on GitHub Pages.</div>
+<div class="tip"><b>Bayaz link:</b> <a href="https://mustjabq15-hue.github.io/bayaz/" style="color:inherit">https://mustjabq15-hue.github.io/bayaz/</a></div>
 </section>
 
-<footer>Screens are from Bayaz with 354 nazams. Fonts in the screenshots are fallbacks; the app will use Jameel Noori Nastaleeq for Urdu and Noor-e-Huda for Arabic once the font files are added.</footer>
+<footer>Bayaz: <a href="https://mustjabq15-hue.github.io/bayaz/" style="color:inherit">https://mustjabq15-hue.github.io/bayaz/</a> · Urdu in Jameel Noori Nastaleeq, Arabic in Noor-e-Huda. Translations marked unofficial are drafts: check before presenting or publishing.</footer>
 </div>
 
 <script>
 // Each mark: [number, x, y, w, h, side]  — rectangle in phone pixels (390×844), badge on left (L) or right (R).
 const STEPS=[
 {id:"home",img:"home",k:"Step 1",h:"The home screen",marks:[
- [1,16,57,358,39,"R","<b>Search box.</b> Type any word: Urdu, roman Urdu or English. It searches titles, every couplet, the transliteration and the translation."],
- [2,16,145,358,32,"L","<b>Authors.</b> Swipe sideways and tap a poet to see only their nazams. The small number is how many there are."],
- [3,16,213,358,32,"R","<b>Themes.</b> Tap a theme such as <i>Praise of Allah</i>, <i>The Holy Prophet (sas)</i>, <i>Khilafat</i> or <i>Prayer</i>."],
- [4,16,253,358,80,"L","<b>Filters.</b> Poet, language (Urdu, Arabic, Persian, Punjabi), text status, and sort order (most listened, most recordings, A–Z)."],
- [5,16,371,358,375,"R","<b>Nazam card.</b> Tap it to open the complete nazam."]],
+ [1,16,61,358,38,"R","<b>Search box.</b> Type any word: Urdu, roman Urdu or English. It searches titles, every couplet, the transliteration and the translation."],
+ [2,16,145,358,34,"L","<b>Authors.</b> Swipe sideways and tap a poet to see only their nazams. The small number is how many there are."],
+ [3,16,213,358,34,"R","<b>Themes.</b> Tap a theme such as <i>Praise of Allah</i>, <i>The Holy Prophet (sas)</i>, <i>Khilafat</i> or <i>Prayer</i>."],
+ [4,16,257,358,80,"L","<b>Filters.</b> Poet, language (Urdu, Arabic, Persian, Punjabi), text status, and sort order (most listened, most recordings, A–Z)."],
+ [5,16,375,358,341,"R","<b>Nazam card.</b> Tap it to open the complete nazam."]],
  extra:`<p class="ex">What the labels on a card mean:</p><div class="legend"><span class="tag g">Famous · #1</span><span class="tag g">13 recordings</span><span class="tag">Official English</span><span class="tag">Full text</span><span class="tag w">Sung lines only</span></div>
  <dl><dt><span class="tag">Full text</span></dt><dd>The whole nazam, in book order, checked against the book.</dd><dt><span class="tag w">Sung lines only</span></dt><dd>Only the lines heard in a recording, not yet checked against the book. Don't use these for a programme yet.</dd><dt><span class="tag">Official English</span></dt><dd>Some or all couplets have the Jama'at's published translation.</dd></dl>`},
 {id:"search",img:"search",k:"Step 2",h:"Search for a line you remember",marks:[
- [1,16,57,358,39,"R","Type a few words. Here: <code>noor saara</code>. Spelling doesn't need to be exact: <i>noor / nur</i>, <i>saara / sara</i>, <i>hai / he</i> all match, and Urdu without zer-zabar works too."],
- [2,16,340,110,26,"L","How many nazams contain your words."],
- [3,31,591,328,122,"R","<b>The matching couplet</b> is shown on the card, with its number (<i>Couplet 1 of 53</i>), so you can see you found the right one before opening it."]],
+ [1,16,61,358,38,"R","Type a few words. Here: <code>noor saara</code>. Spelling doesn't need to be exact: <i>noor / nur</i>, <i>saara / sara</i>, <i>hai / he</i> all match, and Urdu without zer-zabar works too."],
+ [2,16,347,110,20,"L","How many nazams contain your words."],
+ [3,31,609,328,138,"R","<b>The matching couplet</b> is shown on the card, with its number (<i>Couplet 1 of 53</i>), so you can see you found the right one before opening it."]],
  extra:`<div class="tip"><b>Best results first.</b> A nazam whose title or a single couplet contains your exact words appears at the top.</div>`},
 {id:"author",img:"author",k:"Step 3",h:"Browse by author",marks:[
- [1,16,254,175,35,"L","Pick a poet here (or tap their chip in the Authors row)."],
- [2,16,343,358,105,"R","The green box shows the poet's name in English and Urdu, and how many nazams they have in Bayaz."]],
+ [1,16,257,175,36,"L","Pick a poet here (or tap their chip in the Authors row)."],
+ [2,16,347,358,105,"R","The green box shows the poet's name in English and Urdu, and how many nazams they have in Bayaz."]],
  extra:`<p class="ex">To go back to everyone, choose <b>All authors</b>. Filters can be combined, e.g. a poet + the theme <i>The Holy Prophet (sas)</i>.</p>`},
 {id:"nazam",img:"detail",k:"Step 4",h:"The nazam page",marks:[
- [1,16,19,64,23,"L","<b>‹ Back</b> returns to the list. It stays at the top while you scroll."],
- [2,16,349,358,166,"R","<b>Where the text comes from:</b> book, page numbers and original work. Use this when you cite the nazam."],
- [3,16,528,290,24,"L","<b>Open in the book</b> shows the page on alislam.org. <b>Listen</b> opens the recordings."],
- [4,16,661,358,102,"R","<b>Tools:</b> select couplets, show or hide <i>Roman</i> and <i>English</i>, then export."]]},
+ [1,16,20,65,23,"L","<b>‹ Back</b> returns to the list. It stays at the top while you scroll."],
+ [2,16,370,358,167,"R","<b>Where the text comes from:</b> book, page numbers and original work. Use this when you cite the nazam."],
+ [3,16,547,358,24,"L","<b>Open in the book</b> shows the page on alislam.org. <b>Listen</b> opens the recordings."],
+ [4,16,675,358,93,"R","<b>Tools:</b> select couplets, show or hide <i>Roman</i> and <i>English</i>, then export."]],
+ extra:`<div class="tip"><b>Long nazam?</b> When you scroll down, a round <b>↑</b> button appears at the bottom right. Tap it to jump back to the top. <b>Guide</b> in the top bar opens this guide.</div>`},
 {id:"found",img:"found",k:"Step 5",h:"Opened from a search",marks:[
- [1,10,270,370,308,"L","When you open a nazam from a search, the page jumps straight to the matching couplet and draws a <b>gold outline</b> around it. The rest of the nazam is above and below, in book order."]],
+ [1,16,258,358,328,"L","When you open a nazam from a search, the page jumps straight to the matching couplet and draws a <b>gold outline</b> around it. The rest of the nazam is above and below, in book order."]],
  extra:`<div class="tip"><b>Every nazam is complete.</b> Parts sung separately on alislam.org are inside their full nazam, so you always see the context of the couplet you want.</div>`},
 {id:"choose",img:"select",k:"Step 6",h:"Choose your couplets",marks:[
  [1,20,272,20,20,"L","Tick the box beside each couplet you want. A ticked couplet turns green."],
  [2,16,165,238,34,"L","<b>Select most sung</b> ticks the couplets reciters usually choose; untick or add others from anywhere in the nazam. <b>All</b> ticks every couplet, <b>Clear</b> unticks them."],
- [3,263,165,86,34,"R","<b>Roman on/off</b> hides or shows the transliteration."],
+ [3,262,165,87,34,"R","<b>Roman on/off</b> hides or shows the transliteration."],
  [4,16,207,87,34,"L","<b>English on/off</b> hides or shows the translation."],
- [5,111,205,258,37,"R","<b>Export text</b> and <b>Print / PDF</b> become active once something is ticked. Beside them: how many couplets you've chosen."]],
+ [5,111,207,255,34,"R","<b>Export text</b> and <b>Print / PDF</b> become active once something is ticked. Beside them: how many couplets you've chosen."]],
  extra:`<p class="ex">Under each couplet: <i>Sung in 12 of 12 recordings</i> shows how popular that couplet is.</p>`},
 {id:"check",img:"warn",k:"Step 7",h:"Official or unofficial translation?",marks:[
- [1,52,224,54,24,"L","<span class='tag'>Official</span> — the Jama'at's published translation. Its source is added to your export automatically."],
- [2,52,677,183,24,"R","<span class='tag w'>Unofficial — check before use</span> — a draft translation. Check it before presenting or publishing."]],
+ [1,52,225,54,22,"L","<span class='tag'>Official</span> — the Jama'at's published translation. Its source is added to your export automatically."],
+ [2,52,598,183,22,"R","<span class='tag w'>Unofficial — check before use</span> — a draft translation. Check it before presenting or publishing."]],
  extra:`<div class="tip w"><b>Before a programme:</b> when you export, couplets with an unofficial translation get a <b>*</b> and a reminder line at the end, so it is never mistaken for an official translation.</div>`},
 {id:"export",img:"export",k:"Step 8",h:"Export: Urdu → Roman → English",marks:[
- [1,32,218,326,388,"R","Your chosen couplets, each one as <b>Urdu</b>, then <b>transliteration</b>, then <b>English</b>. At the bottom: the book and the official translation used."],
- [2,32,622,169,34,"L","<b>Copy</b>, then paste into WhatsApp, Word or your programme sheet. <b>Download .txt</b> saves it as a file (once Bayaz is on GitHub)."]],
+ [1,32,218,327,388,"R","Your chosen couplets, each one as <b>Urdu</b>, then <b>transliteration</b>, then <b>English</b>. At the bottom: the book and the official translation used."],
+ [2,32,622,170,34,"L","<b>Copy</b>, then paste into WhatsApp, Word or your programme sheet. <b>Download .txt</b> saves it as a file."]],
  extra:`<div class="tip"><b>For a PDF:</b> close this box and tap <b>Print / PDF</b>. On iPhone choose <i>Save to Files</i> or share it; on a computer choose <i>Save as PDF</i>. The PDF uses large centred Urdu, ready to print.</div>`}];
 
 const W=390,H=844,G=46;
