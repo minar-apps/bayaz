@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bayaz — Nazam Finder</title>
+<meta name="theme-color" content="#14532d">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon.svg">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Bayaz">
+<style>
+@font-face{font-family:"Jameel Noori Nastaleeq";src:local("Jameel Noori Nastaleeq"),url("fonts/JameelNooriNastaleeq.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Noor-e-Huda";src:local("noorehuda"),local("Noor-e-Huda"),url("fonts/noorehuda.woff2") format("woff2");font-display:swap}
+:root{--bg:#f7f5ef;--card:#fff;--ink:#1c1b18;--mute:#6b675e;--line:#e4dfd3;--brand:#14532d;--brand2:#e7f2ea;--gold:#9a6b00;--warn:#8a4b00;--warnbg:#fff4df;--ok:#14532d;--okbg:#e7f2ea}
+@media (prefers-color-scheme:dark){:root{--bg:#14140f;--card:#1e1e18;--ink:#f0ede4;--mute:#a8a396;--line:#34332a;--brand:#7fd19b;--brand2:#1d2e22;--gold:#e0b354;--warn:#f0c27a;--warnbg:#33290f;--ok:#7fd19b;--okbg:#1d2e22}}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;padding-bottom:env(safe-area-inset-bottom)}
+.ur{font-family:"Jameel Noori Nastaleeq","Noto Nastaliq Urdu","Urdu Typesetting",serif;direction:rtl;line-height:2.3}
+.ar{font-family:"Noor-e-Huda","Scheherazade New","Amiri","Traditional Arabic","Geeza Pro",serif;direction:rtl;line-height:2.1}
+header.top{position:sticky;top:0;z-index:5;background:#14532d;color:#fff;padding:calc(10px + env(safe-area-inset-top)) 16px 10px;isolation:isolate}
+header.top::before{content:"";position:absolute;inset:0;z-index:-1;background:url(header-script.png) 0 0/auto 170px repeat;opacity:.6;pointer-events:none}
+@media (prefers-color-scheme:dark){header.top{background:#174f2f}}
+.hback{background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.35);color:#fff;border-radius:8px;padding:2px 10px;font-size:15px;cursor:pointer;align-self:center}
+.hit{background:var(--brand2);border-radius:8px;padding:6px 8px;margin-top:6px;font-size:14px}
+.hit .ur{font-size:21px;line-height:2}
+.unit.found{outline:2px solid var(--gold);outline-offset:4px;border-radius:6px}
+.brand{display:flex;align-items:baseline;gap:10px;cursor:pointer}
+.brand b{font-size:20px;letter-spacing:.3px}
+.brand span{font-family:"Jameel Noori Nastaleeq","Noto Nastaliq Urdu",serif;font-size:27px;line-height:1.6}
+.brand small{margin-left:auto;opacity:.8;font-size:12px}
+#q{width:100%;margin-top:8px;padding:10px 12px;border-radius:10px;border:0;font-size:16px;background:#fff;color:#111}
+main{max-width:860px;margin:0 auto;padding:12px 16px 80px}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:4px 0 10px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:6px 12px;font-size:14px;cursor:pointer;white-space:nowrap}
+.chip.on{background:var(--brand);border-color:var(--brand);color:#fff}
+@media (prefers-color-scheme:dark){.chip.on{color:#0c1a11}}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.filters select{flex:1 1 150px;min-width:0;padding:8px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-size:14px}
+.sect{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--mute);margin:6px 0 0}
+.cnt{opacity:.65;font-size:12px;margin-left:2px}
+.count{color:var(--mute);font-size:13px;margin:4px 0 8px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:10px;cursor:pointer}
+.card .tu{font-size:28px}
+.card .t{font-weight:600}
+.meta{color:var(--mute);font-size:13px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.tag{font-size:12px;border-radius:6px;padding:2px 7px;background:var(--brand2);color:var(--brand)}
+.tag.gold{background:transparent;border:1px solid var(--gold);color:var(--gold)}
+.tag.warn{background:var(--warnbg);color:var(--warn)}
+.back{background:none;border:0;color:var(--brand);font-size:15px;padding:6px 0;cursor:pointer}
+h1.tu{font-size:36px;font-weight:400;margin:4px 0 0}
+h2{font-size:17px;margin:2px 0}
+.notice{border-radius:10px;padding:10px 12px;font-size:14px;margin:10px 0;background:var(--warnbg);color:var(--warn)}
+.notice.ok{background:var(--okbg);color:var(--ok)}
+.links a{color:var(--brand);margin-right:14px;font-size:14px}
+.bar{position:sticky;top:calc(96px + env(safe-area-inset-top));z-index:4;background:var(--bg);padding:8px 0;display:flex;flex-wrap:wrap;gap:8px;border-bottom:1px solid var(--line)}
+button.b{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:8px;padding:8px 10px;font-size:14px;cursor:pointer}
+button.b.p{background:var(--brand);border-color:var(--brand);color:#fff}
+@media (prefers-color-scheme:dark){button.b.p{color:#0c1a11}}
+button.b:disabled{opacity:.45}
+.unit{display:grid;grid-template-columns:30px 1fr;gap:6px;padding:12px 0;border-bottom:1px solid var(--line)}
+.unit input{width:20px;height:20px;margin-top:10px}
+.unit.sel{background:var(--brand2);margin:0 -10px;padding:12px 10px;border-radius:10px}
+.u{font-size:29px;text-align:right}
+.u.ar{font-size:25px}
+.r{font-style:italic;color:var(--mute);font-size:15px}
+.e{font-size:15.5px;margin-top:2px}
+.um{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;align-items:center}
+.sung{font-size:12px;color:var(--mute)}
+.sung b{color:var(--gold)}
+.ut{font-size:22px;text-align:right;color:var(--mute)}
+.hide-r .r,.hide-e .e,.hide-e .ut{display:none}
+dialog{border:0;border-radius:14px;max-width:640px;width:92vw;background:var(--card);color:var(--ink);padding:16px}
+dialog::backdrop{background:rgba(0,0,0,.5)}
+textarea{width:100%;height:46vh;font:14px/1.6 ui-monospace,Menlo,monospace;border:1px solid var(--line);border-radius:8px;padding:8px;background:var(--bg);color:var(--ink);direction:auto}
+.about{font-size:14px;color:var(--mute);margin-top:24px;border-top:1px solid var(--line);padding-top:12px}
+#print{display:none}
+@media print{
+  body{background:#fff;color:#000}
+  header.top,main{display:none!important}
+  #print{display:block;padding:10mm 6mm;color:#000}
+  #print h1{font-size:22pt;font-weight:400;text-align:center;margin:0}
+  #print .ph{text-align:center;font-size:11pt;margin-bottom:8mm}
+  #print .pu{break-inside:avoid;margin-bottom:6mm}
+  #print .u{font-size:22pt;text-align:center}
+  #print .r{font-size:11pt;text-align:center;color:#333;font-style:italic}
+  #print .e{font-size:11pt;text-align:center}
+  #print .pf{font-size:9pt;color:#333;border-top:1px solid #999;padding-top:3mm;margin-top:8mm}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="brand"><button class="hback" id="hb" hidden onclick="event.stopPropagation();history.length>1?history.back():location.hash=''">‹ Back</button><b onclick="location.hash=''">Bayaz</b><span onclick="location.hash=''">بیاض</span><small id="ver"></small></div>
+  <input id="q" type="search" placeholder="Search any word — Urdu, roman, English" autocomplete="off">
+</header>
+<main id="app">Loading…</main>
+<div id="print"></div>
+<dialog id="dlg"><h2>Export text</h2><textarea id="txt" readonly></textarea>
+  <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap"><button class="b p" id="copy">Copy</button><button class="b" id="dl">Download .txt</button><button class="b" onclick="dlg.close()">Close</button></div></dialog>
+<script>
+"use strict";
+let D=null, S={theme:"",poet:"",lang:"",level:"",sort:"rank",q:""}, sel=new Set(), cur=null, view={r:true,e:true};
+const $=s=>document.querySelector(s), esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+// Forgiving search key: ignores harakat, Urdu letter variants, and the many ways roman Urdu is spelt (ee/i, oo/u, ai/e, w/v, q/k, double letters).
+const nrm=s=>String(s||"").toLowerCase().replace(/['’`ʼ‘]/g,"").replace(/[ً-ٰٟۖ-ۭؐ-ؚ]/g,"").replace(/[يىےئ]/g,"ی").replace(/ك/g,"ک").replace(/[آأإ]/g,"ا").replace(/[ھۃة]/g,"ہ").replace(/ؤ/g,"و")
+ .replace(/[^a-z0-9؀-ۿ ]/g," ").replace(/ai|ay\b|ae\b/g,"e").replace(/ee|ie/g,"i").replace(/oo|ou/g,"u").replace(/w/g,"v").replace(/q/g,"k").replace(/([a-z])\1+/g,"$1").replace(/\s+/g," ").trim();
+const qWords=()=>nrm(S.q).split(" ").filter(Boolean);
+function hitUnit(n,q){if(!q.length)return -1;const ph=q.join(" ");let best=-1,bs=0;n.units.forEach((u,i)=>{const s=q.filter(w=>u._s.includes(w)).length+(q.length>1&&u._s.includes(ph)?q.length+1:0);if(s>bs){bs=s;best=i}});return bs?best:-1}
+// How well a nazam matches the search: whole phrase in title or one couplet first, then all words in one couplet.
+function score(n,q){if(!q.length)return 0;const ph=q.join(" "),ti=nrm(n.t+" "+n.tu+" "+(n.also||[]).map(a=>a.t+" "+a.tu).join(" "));
+ if(ti.includes(ph))return 4;if(n.units.some(u=>u._s.includes(ph)))return 3;if(q.every(w=>ti.includes(w)))return 2;if(n.units.some(u=>q.every(w=>u._s.includes(w))))return 1;return 0}
+const isAr=(n,line)=>n.lang==="Arabic"||/[ًٌٍْ]/.test(line);
+const cls=(n,line)=>isAr(n,line)?"ar":"ur";
+const stLabel={official:"Official translation",["unofficial-draft"]:"Unofficial translation — check before presenting or publishing",none:"No translation yet"};
+fetch("data/bayaz.json").then(r=>r.json()).then(d=>{D=d;D.nazms.forEach(n=>{n.units.forEach(u=>u._s=nrm([...u.u,...u.r,u.ut||"",...u.e,u.note||""].join(" ")));n._s=nrm([n.t,n.tu,...(n.also||[]).flatMap(a=>[a.t,a.tu]),n.poet,n.poetU,n.themes.map(t=>D.themes[t]).join(" "),n.source&&n.source.book,n.source&&n.source.originalWork].join(" "))+" "+n.units.map(u=>u._s).join(" ")});$("#ver").textContent=D.nazms.length+" nazams";route()}).catch(e=>{$("#app").textContent="Could not load data: "+e});
+addEventListener("hashchange",route);
+$("#q").addEventListener("input",e=>{S.q=e.target.value;if(location.hash.startsWith("#/n/"))location.hash="";else list()});
+function route(){const m=location.hash.match(/^#\/n\/(.+)$/);if(m){const n=D.nazms.find(x=>x.slug===decodeURIComponent(m[1]));if(n){detail(n);return}}list()}
+function filtered(){const q=qWords();let a=D.nazms.filter(n=>(!S.theme||n.themes.includes(S.theme))&&(!S.poet||n.poet===S.poet)&&(!S.lang||n.lang===S.lang)&&(!S.level||(S.level==="official"?n.units.some(u=>u.st==="official"):n.level===S.level))&&q.every(w=>n._s.includes(w)));
+ a.sort(S.sort==="az"?(x,y)=>x.t.localeCompare(y.t):S.sort==="recs"?(x,y)=>y.recs-x.recs||x.rank-y.rank:(x,y)=>x.rank-y.rank);
+ if(q.length){a.forEach(n=>n._sc=score(n,q));a.sort((x,y)=>y._sc-x._sc)}return a}
+function list(){cur=null;$("#hb").hidden=true;const a=filtered();const th=Object.entries(D.themes);
+ $("#app").innerHTML=`<div class="sect">Authors</div><div class="chips"><button class="chip ${S.poet?"":"on"}" data-po="">All authors</button>${D.poets.map(p=>`<button class="chip ${S.poet===p?"on":""}" data-po="${esc(p)}">${esc(shortPoet(p))} <span class="cnt">${D.poetCounts[p]}</span></button>`).join("")}</div>
+ <div class="sect">Themes</div><div class="chips"><button class="chip ${S.theme?"":"on"}" data-th="">All themes</button>${th.map(([k,v])=>`<button class="chip ${S.theme===k?"on":""}" data-th="${k}">${esc(v.split(/[:(,]/)[0])}</button>`).join("")}</div>
+ <div class="filters"><select id="fp"><option value="">All poets</option>${D.poets.map(p=>`<option ${S.poet===p?"selected":""}>${esc(p)}</option>`).join("")}</select>
+ <select id="fl"><option value="">All languages</option>${["Urdu","Arabic","Persian","Punjabi","Other"].map(l=>`<option ${S.lang===l?"selected":""}>${l}</option>`).join("")}</select>
+ <select id="fv"><option value="">Any text status</option><option value="full" ${S.level==="full"?"selected":""}>Full text from book</option><option value="official" ${S.level==="official"?"selected":""}>Has official translation</option></select>
+ <select id="fs"><option value="rank">Most listened first</option><option value="recs" ${S.sort==="recs"?"selected":""}>Most recordings first</option><option value="az" ${S.sort==="az"?"selected":""}>A–Z</option></select></div>
+ ${S.poet?`<div class="notice ok"><b>${esc(S.poet)}</b>${D.poetUrdu[S.poet]?` · <span class="ur">${esc(D.poetUrdu[S.poet])}</span>`:""} — ${D.poetCounts[S.poet]} nazam${D.poetCounts[S.poet]===1?"":"s"}</div>`:""}
+ ${S.theme?`<div class="notice ok">${esc(D.themes[S.theme])}</div>`:""}
+ <div class="count">${a.length} nazam${a.length===1?"":"s"}</div>
+ ${a.slice(0,400).map(card).join("")||"<p>No nazam matches.</p>"}
+ <div class="about"><b>About Bayaz.</b> A notebook of nazams of the Ahmadiyya Muslim Community for choosing nazams and couplets for an ijlas. Recordings and sung lines are from alislam.org/nazms; book texts and official translations are from the Al Islam Digital Library. Translations marked “unofficial” are drafts and must be checked before presenting or publishing. Theme tags are a first pass. Data built ${esc(D.built)}.</div>`;
+ document.querySelectorAll("[data-th]").forEach(b=>b.onclick=()=>{S.theme=b.dataset.th;list()});
+ document.querySelectorAll("[data-po]").forEach(b=>b.onclick=()=>{S.poet=b.dataset.po;list()});
+ $("#fp").onchange=e=>{S.poet=e.target.value;list()};$("#fl").onchange=e=>{S.lang=e.target.value;list()};$("#fv").onchange=e=>{S.level=e.target.value;list()};$("#fs").onchange=e=>{S.sort=e.target.value;list()};
+ document.querySelectorAll(".card").forEach(c=>c.onclick=()=>location.hash="#/n/"+encodeURIComponent(c.dataset.slug))}
+function shortPoet(p){return p.replace(/^Hazrat Mirza Ghulam Ahmad.*$/,"Promised Messiah (as)").replace(/^Hazrat Mirza Bashir-ud-Din.*$/,"Khalifatul Masih II (ra)").replace(/^Hazrat Mirza Nasir Ahmad.*$/,"Khalifatul Masih III (rh)").replace(/^Hazrat Mirza Tahir Ahmad.*$/,"Khalifatul Masih IV (rh)").replace(/^Hazrat Syeda Nawab Mubarika Begum.*$/,"Nawab Mubarka Begum (ra)").replace(/^Hazrat Mir Muhammad Ismael$/,"Mir Muhammad Ismail (ra)")}
+function card(n){const off=n.units.some(u=>u.st==="official");return `<div class="card" data-slug="${esc(n.slug)}"><div class="tu ${cls(n,n.tu)}">${esc(n.tu)}</div><div class="t">${esc(n.t)}</div>${(n.also||[]).length?`<div class="meta">Includes: ${n.also.map(a=>esc(a.t)).join(" · ")}</div>`:""}<div class="meta">${esc(n.poet)}</div>
+ <div class="tags">${n.rank<=50?`<span class="tag gold">Famous · #${n.rank}</span>`:""}${n.themes.map(t=>`<span class="tag">${esc(D.themes[t].split(/[:(,]/)[0])}</span>`).join("")}<span class="tag gold">${n.recs} recording${n.recs===1?"":"s"}</span>${off?'<span class="tag">Official English</span>':""}${n.level==="full"?'<span class="tag">Full text</span>':'<span class="tag warn">Sung lines only</span>'}${n.lang!=="Urdu"?`<span class="tag gold">${n.lang}</span>`:""}</div>${snippet(n)}</div>`}
+function snippet(n){const q=qWords(),i=hitUnit(n,q);if(i<0)return "";const u=n.units[i];
+ const pick=a=>a.filter(l=>{const k=nrm(l);return q.some(w=>k.includes(w))});
+ const r=pick(u.r),e=pick(u.e),ut=u.ut&&pick([u.ut]).length;
+ return `<div class="hit"><div class="${cls(n,u.u[0])}">${u.u.slice(0,2).map(esc).join("<br>")}</div>${r.length?`<div class="r">${r.map(esc).join(" / ")}</div>`:""}${ut?`<div class="ur">${esc(u.ut)}</div>`:""}${e.length?`<div class="e">${e.map(esc).join(" ")}</div>`:""}<div class="meta">Couplet ${i+1} of ${n.units.length}</div></div>`}
+function detail(n){cur=n;sel=new Set();const full=n.level==="full";
+ $("#app").innerHTML=`<h1 class="tu ${cls(n,n.tu)}">${esc(n.tu)}</h1><h2>${esc(n.t)}</h2>${(n.also||[]).length?`<div class="meta">This complete nazam also contains the parts sung as: ${n.also.map(a=>`<span class="ur">${esc(a.tu)}</span>`).join(" · ")}</div>`:""}<div class="meta">${esc(n.poet)}${n.poetU?" · "+esc(n.poetU):""}</div>
+ <div class="tags">${n.themes.map(t=>`<span class="tag">${esc(D.themes[t])}</span>`).join("")}</div>
+ ${full?`<div class="notice ok"><b>${n.source.libraryUrl?"Text from the book:":"Text:"}</b> ${esc(n.source.book)}${n.source.printedPages&&n.source.printedPages!=="-"?", pp. "+esc(n.source.printedPages):""}${n.source.originalWork?" · "+esc(n.source.originalWork):""}. ${esc(n.notes||"")}</div>`
+      :`<div class="notice"><b>Sung lines only.</b> These lines were transcribed automatically from a recording on alislam.org. They are not the full nazam, are not checked against the book and contain mistakes. No translation yet.</div>`}
+ <div class="links">${full&&n.source.libraryUrl?`<a href="${esc(n.source.libraryUrl)}" target="_blank" rel="noopener">Open in the book ↗</a>`:""}<a href="${esc(n.listen)}" target="_blank" rel="noopener">Listen on alislam.org ↗</a></div>
+ ${n.reciters.length?`<div class="meta" style="margin-top:6px">Recited by: ${n.reciters.map(r=>`<a href="${esc(r.url)}" target="_blank" rel="noopener" style="color:inherit">${esc(r.name)}</a>`).join(", ")}</div>`:""}
+ <div class="bar"><button class="b" id="mostsung">Select most sung</button><button class="b" id="all">All</button><button class="b" id="none">Clear</button>
+ <button class="b" id="tr">Roman ${view.r?"on":"off"}</button><button class="b" id="te">English ${view.e?"on":"off"}</button>
+ <button class="b p" id="ex" disabled>Export text</button><button class="b p" id="pdf" disabled>Print / PDF</button><span class="sung" id="sc"></span></div>
+ <div id="units" class="${view.r?"":"hide-r"} ${view.e?"":"hide-e"}">${n.units.map((u,i)=>unit(n,u,i)).join("")}</div>`;
+ $("#hb").hidden=false;
+ const q=qWords(),hits=q.length?(()=>{const all=n.units.map((u,i)=>q.every(w=>u._s.includes(w))?i:-1).filter(i=>i>=0);if(all.length)return all;const h=hitUnit(n,q);return h<0?[]:[h]})():[];
+ hits.forEach(i=>document.querySelectorAll(".unit")[i].classList.add("found"));
+ if(hits.length)setTimeout(()=>document.querySelectorAll(".unit")[hits[0]].scrollIntoView({block:"center"}),50);else window.scrollTo(0,0);
+ document.querySelectorAll(".unit input").forEach(c=>c.onchange=()=>{c.checked?sel.add(+c.dataset.i):sel.delete(+c.dataset.i);c.closest(".unit").classList.toggle("sel",c.checked);upd()});
+ $("#all").onclick=()=>setSel(n.units.map((_,i)=>i));$("#none").onclick=()=>setSel([]);
+ $("#mostsung").onclick=()=>{const mx=Math.max(0,...n.units.map(u=>u.sung||0));if(!mx){setSel([]);return}const th=Math.max(1,Math.ceil(mx*0.4));setSel(n.units.map((u,i)=>(u.sung||0)>=th?i:-1).filter(i=>i>=0))};
+ $("#tr").onclick=()=>{view.r=!view.r;$("#units").classList.toggle("hide-r",!view.r);$("#tr").textContent="Roman "+(view.r?"on":"off")};
+ $("#te").onclick=()=>{view.e=!view.e;$("#units").classList.toggle("hide-e",!view.e);$("#te").textContent="English "+(view.e?"on":"off")};
+ $("#ex").onclick=()=>{$("#txt").value=exportText(n);$("#dlg").showModal()};$("#pdf").onclick=()=>printSel(n);upd()}
+function setSel(a){sel=new Set(a);document.querySelectorAll(".unit input").forEach(c=>{c.checked=sel.has(+c.dataset.i);c.closest(".unit").classList.toggle("sel",c.checked)});upd()}
+function upd(){$("#ex").disabled=$("#pdf").disabled=!sel.size;$("#sc").textContent=sel.size?sel.size+" selected":""}
+function unit(n,u,i){return `<label class="unit"><input type="checkbox" data-i="${i}"><div>
+ ${u.u.map(l=>`<div class="u ${cls(n,l)}">${esc(l)}</div>`).join("")}
+ ${u.r.filter(Boolean).map(l=>`<div class="r">${esc(l)}</div>`).join("")}
+ ${u.ut?`<div class="ut ur">${esc(u.ut)}</div>`:""}
+ ${u.e.map(l=>`<div class="e">${esc(l)}</div>`).join("")}
+ <div class="um">${u.st==="official"?'<span class="tag">Official</span>':u.st==="unofficial-draft"?'<span class="tag warn">Unofficial — check before use</span>':""}
+ <span class="sung">${u.sung?`Sung in <b>${u.sung}</b> of ${n.recs} recording${n.recs===1?"":"s"}`:(n.recs?"Not in the recordings":"")}</span>${u.note?`<span class="sung">· ${esc(u.note)}</span>`:""}</div></div></label>`}
+function picked(n){return [...sel].sort((a,b)=>a-b).map(i=>n.units[i])}
+function footer(n,us){const f=[];const src=[...new Set(us.filter(u=>u.st==="official"&&u.src).map(u=>u.src))];
+ if(n.level==="full")f.push("Text: "+n.source.book+(n.source.printedPages&&n.source.printedPages!=="-"?", pp. "+n.source.printedPages:"")+(n.source.originalWork?" ("+n.source.originalWork+")":"")+".");
+ else f.push("Text: lines transcribed from a recording on alislam.org; not checked against the book.");
+ if(src.length)f.push("Official translation: "+src.join("; ")+".");
+ if(us.some(u=>u.ut)&&n.utSource)f.push("Urdu translation: "+n.utSource+".");
+ if(us.some(u=>u.st==="unofficial-draft"))f.push("Couplets marked * carry an unofficial translation: check it before presenting or publishing.");
+ return f}
+function exportText(n){const us=picked(n);const L=[n.tu,n.t,n.poet,""];
+ us.forEach(u=>{L.push(...u.u);if(u.r.some(Boolean))L.push(...u.r.filter(Boolean));if(u.ut)L.push(u.ut);if(u.e.length)L.push(...u.e.map((l,j)=>l+(u.st==="unofficial-draft"&&j===u.e.length-1?" *":"")));L.push("")});
+ L.push("—",...footer(n,us));return L.join("\n")}
+function printSel(n){const us=picked(n);$("#print").innerHTML=`<h1 class="${cls(n,n.tu)}">${esc(n.tu)}</h1><div class="ph">${esc(n.t)}<br>${esc(n.poet)}</div>`+us.map(u=>`<div class="pu">${u.u.map(l=>`<div class="u ${cls(n,l)}">${esc(l)}</div>`).join("")}${u.r.filter(Boolean).map(l=>`<div class="r">${esc(l)}</div>`).join("")}${u.ut?`<div class="u ur" style="font-size:13pt">${esc(u.ut)}</div>`:""}${u.e.map((l,j)=>`<div class="e">${esc(l)}${u.st==="unofficial-draft"&&j===u.e.length-1?" *":""}</div>`).join("")}</div>`).join("")+`<div class="pf">${footer(n,us).map(esc).join("<br>")}</div>`;
+ (document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(()=>window.print())}
+$("#copy").onclick=async()=>{try{await navigator.clipboard.writeText($("#txt").value);$("#copy").textContent="Copied"}catch(e){$("#txt").select();document.execCommand("copy")}setTimeout(()=>$("#copy").textContent="Copy",1500)};
+$("#dl").onclick=()=>{const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([$("#txt").value],{type:"text/plain;charset=utf-8"}));a.download=(cur?cur.slug:"bayaz")+".txt";a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000)};
+if("serviceWorker" in navigator&&location.protocol==="https:")navigator.serviceWorker.register("sw.js").catch(()=>{});
+</script>
+</body>
+</html>

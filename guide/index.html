@@ -1,0 +1,120 @@
+<meta charset="utf-8">
+<title>Bayaz Guide</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&family=Noto+Nastaliq+Urdu:wght@500&display=swap">
+<style>
+:root{--bg:#f7f5ef;--card:#fff;--ink:#1c1b18;--mute:#6b675e;--line:#e4dfd3;--brand:#14532d;--brand2:#e7f2ea;--gold:#b98100;--mark:#e3a008;--halo:#fff;--warnbg:#fff4df;--warn:#8a4b00}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#14140f;--card:#1e1e18;--ink:#f0ede4;--mute:#a8a396;--line:#34332a;--brand:#7fd19b;--brand2:#1d2e22;--gold:#e0b354;--mark:#f2b630;--halo:#14140f;--warnbg:#33290f;--warn:#f0c27a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#14140f;--card:#1e1e18;--ink:#f0ede4;--mute:#a8a396;--line:#34332a;--brand:#7fd19b;--brand2:#1d2e22;--gold:#e0b354;--mark:#f2b630;--halo:#14140f;--warnbg:#33290f;--warn:#f0c27a;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:16px/1.6 Inter,-apple-system,"Segoe UI",sans-serif;margin:0}
+.hero{background:linear-gradient(90deg,rgba(13,58,31,.92),rgba(13,58,31,.55)),url(img/header.png) 0 0/auto 170px repeat,#14532d;color:#fff;padding-block:40px 34px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.hero .in,.wrap{max-width:980px;margin:0 auto}
+.hero h1{font:600 clamp(30px,6vw,46px)/1.1 "Source Serif 4",Georgia,serif;margin:0;display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.hero h1 span{font:500 .8em/1.8 "Noto Nastaliq Urdu",serif}
+.hero p{max-width:60ch;margin:10px 0 0;opacity:.92}
+.wrap{padding-block:28px 60px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.toc{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 30px}
+.toc a{border:1px solid var(--line);background:var(--card);color:var(--ink);text-decoration:none;border-radius:999px;padding:5px 12px;font-size:14px}
+section.step{display:grid;grid-template-columns:minmax(0,360px) minmax(0,1fr);gap:34px;align-items:start;padding:30px 0;border-top:1px solid var(--line)}
+@media (max-width:760px){section.step{grid-template-columns:1fr;gap:16px}}
+.fig{max-width:360px;width:100%;margin:0 auto}
+.fig svg{width:100%;height:auto;display:block}
+.k{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--gold);font-weight:600}
+h2{font:600 26px/1.2 "Source Serif 4",Georgia,serif;margin:4px 0 12px;text-wrap:balance}
+ol.marks{list-style:none;padding:0;margin:0}
+ol.marks li{display:grid;grid-template-columns:30px 1fr;gap:10px;margin:0 0 12px}
+.n{width:26px;height:26px;border-radius:50%;background:var(--mark);color:#1c1b18;font-weight:700;font-size:14px;display:grid;place-items:center;margin-top:1px}
+.tip{background:var(--brand2);color:var(--ink);border-radius:10px;padding:10px 14px;font-size:15px;margin-top:14px}
+.tip.w{background:var(--warnbg)}
+.tip b{color:var(--brand)}.tip.w b{color:var(--warn)}
+.legend{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.tag{font-size:13px;border-radius:6px;padding:1px 8px;background:var(--brand2);color:var(--brand)}
+.tag.g{background:transparent;border:1px solid var(--gold);color:var(--gold)}
+.tag.w{background:var(--warnbg);color:var(--warn)}
+dl{margin:8px 0 0;font-size:15px}dt{margin-top:8px}dd{margin:0;color:var(--mute)}
+code{font-size:14px;background:var(--card);border:1px solid var(--line);border-radius:5px;padding:0 5px}
+.ex{color:var(--mute);font-size:15px}
+footer{color:var(--mute);font-size:14px;border-top:1px solid var(--line);padding-top:16px;margin-top:20px}
+</style>
+
+<header class="hero"><div class="in">
+<h1>How to use Bayaz <span>بیاض</span></h1>
+<p>A step-by-step guide for murabbis: find a nazam, choose the couplets you need for an ijlas, and take them away as text or PDF in Urdu, transliteration and English.</p>
+</div></header>
+
+<div class="wrap">
+<nav class="toc">
+<a href="#home">1 · Home screen</a><a href="#search">2 · Search</a><a href="#author">3 · By author</a><a href="#nazam">4 · Nazam page</a><a href="#found">5 · From search</a><a href="#choose">6 · Choose couplets</a><a href="#check">7 · Official or not</a><a href="#export">8 · Export</a><a href="#phone">9 · On your phone</a>
+</nav>
+<div id="steps"></div>
+
+<section class="step" id="phone" style="display:block">
+<div class="k">Step 9</div><h2>Keep it on your iPhone</h2>
+<ol class="marks">
+<li><span class="n">1</span><div>Open the Bayaz link in <b>Safari</b>.</div></li>
+<li><span class="n">2</span><div>Tap the <b>Share</b> button (square with an arrow), then <b>Add to Home Screen</b>.</div></li>
+<li><span class="n">3</span><div>Bayaz now opens like an app and works without internet after the first visit.</div></li>
+</ol>
+<div class="tip w"><b>For now:</b> the app is not on GitHub yet, so use the preview link. The preview cannot download files or print; those two buttons appear once it is on GitHub Pages.</div>
+</section>
+
+<footer>Screens are from Bayaz with 354 nazams. Fonts in the screenshots are fallbacks; the app will use Jameel Noori Nastaleeq for Urdu and Noor-e-Huda for Arabic once the font files are added.</footer>
+</div>
+
+<script>
+// Each mark: [number, x, y, w, h, side]  — rectangle in phone pixels (390×844), badge on left (L) or right (R).
+const STEPS=[
+{id:"home",img:"home",k:"Step 1",h:"The home screen",marks:[
+ [1,16,57,358,39,"R","<b>Search box.</b> Type any word: Urdu, roman Urdu or English. It searches titles, every couplet, the transliteration and the translation."],
+ [2,16,145,358,32,"L","<b>Authors.</b> Swipe sideways and tap a poet to see only their nazams. The small number is how many there are."],
+ [3,16,213,358,32,"R","<b>Themes.</b> Tap a theme such as <i>Praise of Allah</i>, <i>The Holy Prophet (sas)</i>, <i>Khilafat</i> or <i>Prayer</i>."],
+ [4,16,253,358,80,"L","<b>Filters.</b> Poet, language (Urdu, Arabic, Persian, Punjabi), text status, and sort order (most listened, most recordings, A–Z)."],
+ [5,16,371,358,375,"R","<b>Nazam card.</b> Tap it to open the complete nazam."]],
+ extra:`<p class="ex">What the labels on a card mean:</p><div class="legend"><span class="tag g">Famous · #1</span><span class="tag g">13 recordings</span><span class="tag">Official English</span><span class="tag">Full text</span><span class="tag w">Sung lines only</span></div>
+ <dl><dt><span class="tag">Full text</span></dt><dd>The whole nazam, in book order, checked against the book.</dd><dt><span class="tag w">Sung lines only</span></dt><dd>Only the lines heard in a recording, not yet checked against the book. Don't use these for a programme yet.</dd><dt><span class="tag">Official English</span></dt><dd>Some or all couplets have the Jama'at's published translation.</dd></dl>`},
+{id:"search",img:"search",k:"Step 2",h:"Search for a line you remember",marks:[
+ [1,16,57,358,39,"R","Type a few words. Here: <code>noor saara</code>. Spelling doesn't need to be exact: <i>noor / nur</i>, <i>saara / sara</i>, <i>hai / he</i> all match, and Urdu without zer-zabar works too."],
+ [2,16,340,110,26,"L","How many nazams contain your words."],
+ [3,31,591,328,122,"R","<b>The matching couplet</b> is shown on the card, with its number (<i>Couplet 1 of 53</i>), so you can see you found the right one before opening it."]],
+ extra:`<div class="tip"><b>Best results first.</b> A nazam whose title or a single couplet contains your exact words appears at the top.</div>`},
+{id:"author",img:"author",k:"Step 3",h:"Browse by author",marks:[
+ [1,16,254,175,35,"L","Pick a poet here (or tap their chip in the Authors row)."],
+ [2,16,343,358,105,"R","The green box shows the poet's name in English and Urdu, and how many nazams they have in Bayaz."]],
+ extra:`<p class="ex">To go back to everyone, choose <b>All authors</b>. Filters can be combined, e.g. a poet + the theme <i>The Holy Prophet (sas)</i>.</p>`},
+{id:"nazam",img:"detail",k:"Step 4",h:"The nazam page",marks:[
+ [1,16,19,64,23,"L","<b>‹ Back</b> returns to the list. It stays at the top while you scroll."],
+ [2,16,349,358,166,"R","<b>Where the text comes from:</b> book, page numbers and original work. Use this when you cite the nazam."],
+ [3,16,528,290,24,"L","<b>Open in the book</b> shows the page on alislam.org. <b>Listen</b> opens the recordings."],
+ [4,16,661,358,102,"R","<b>Tools:</b> select couplets, show or hide <i>Roman</i> and <i>English</i>, then export."]]},
+{id:"found",img:"found",k:"Step 5",h:"Opened from a search",marks:[
+ [1,10,270,370,308,"L","When you open a nazam from a search, the page jumps straight to the matching couplet and draws a <b>gold outline</b> around it. The rest of the nazam is above and below, in book order."]],
+ extra:`<div class="tip"><b>Every nazam is complete.</b> Parts sung separately on alislam.org are inside their full nazam, so you always see the context of the couplet you want.</div>`},
+{id:"choose",img:"select",k:"Step 6",h:"Choose your couplets",marks:[
+ [1,20,272,20,20,"L","Tick the box beside each couplet you want. A ticked couplet turns green."],
+ [2,16,165,238,34,"L","<b>Select most sung</b> ticks the couplets reciters usually choose; untick or add others from anywhere in the nazam. <b>All</b> ticks every couplet, <b>Clear</b> unticks them."],
+ [3,263,165,86,34,"R","<b>Roman on/off</b> hides or shows the transliteration."],
+ [4,16,207,87,34,"L","<b>English on/off</b> hides or shows the translation."],
+ [5,111,205,258,37,"R","<b>Export text</b> and <b>Print / PDF</b> become active once something is ticked. Beside them: how many couplets you've chosen."]],
+ extra:`<p class="ex">Under each couplet: <i>Sung in 12 of 12 recordings</i> shows how popular that couplet is.</p>`},
+{id:"check",img:"warn",k:"Step 7",h:"Official or unofficial translation?",marks:[
+ [1,52,224,54,24,"L","<span class='tag'>Official</span> — the Jama'at's published translation. Its source is added to your export automatically."],
+ [2,52,677,183,24,"R","<span class='tag w'>Unofficial — check before use</span> — a draft translation. Check it before presenting or publishing."]],
+ extra:`<div class="tip w"><b>Before a programme:</b> when you export, couplets with an unofficial translation get a <b>*</b> and a reminder line at the end, so it is never mistaken for an official translation.</div>`},
+{id:"export",img:"export",k:"Step 8",h:"Export: Urdu → Roman → English",marks:[
+ [1,32,218,326,388,"R","Your chosen couplets, each one as <b>Urdu</b>, then <b>transliteration</b>, then <b>English</b>. At the bottom: the book and the official translation used."],
+ [2,32,622,169,34,"L","<b>Copy</b>, then paste into WhatsApp, Word or your programme sheet. <b>Download .txt</b> saves it as a file (once Bayaz is on GitHub)."]],
+ extra:`<div class="tip"><b>For a PDF:</b> close this box and tap <b>Print / PDF</b>. On iPhone choose <i>Save to Files</i> or share it; on a computer choose <i>Save as PDF</i>. The PDF uses large centred Urdu, ready to print.</div>`}];
+
+const W=390,H=844,G=46;
+function fig(s){const m=s.marks.map(([n,x,y,w,h,side])=>{const cy=y+h/2,bx=side==="L"?-G/2:W+G/2,by=Math.min(Math.max(cy,18),H-18);
+ const ex=side==="L"?x-3:x+w+3;const ey=Math.min(Math.max(by,y+4),y+h-4);
+ return `<rect x="${x-3}" y="${y-3}" width="${w+6}" height="${h+6}" rx="9" fill="none" stroke="var(--halo)" stroke-width="6"/><rect x="${x-3}" y="${y-3}" width="${w+6}" height="${h+6}" rx="9" fill="none" stroke="var(--mark)" stroke-width="3"/>
+ <line x1="${side==="L"?bx+13:bx-13}" y1="${by}" x2="${ex}" y2="${ey}" stroke="var(--halo)" stroke-width="6" stroke-linecap="round"/><line x1="${side==="L"?bx+13:bx-13}" y1="${by}" x2="${side==="L"?ex-7:ex+7}" y2="${ey}" stroke="var(--mark)" stroke-width="3" stroke-linecap="round"/>
+ <path d="${side==="L"?`M${ex} ${ey} l-10 -6 v12z`:`M${ex} ${ey} l10 -6 v12z`}" fill="var(--mark)"/>
+ <circle cx="${bx}" cy="${by}" r="13" fill="var(--mark)" stroke="var(--halo)" stroke-width="3"/><text x="${bx}" y="${by+5}" text-anchor="middle" font-size="15" font-weight="700" fill="#1c1b18" font-family="Inter,sans-serif">${n}</text>`}).join("");
+ return `<svg viewBox="${-G} -8 ${W+2*G} ${H+16}" role="img" aria-label="Bayaz screen: ${s.h}"><defs><clipPath id="c-${s.id}"><rect width="${W}" height="${H}" rx="26"/></clipPath></defs>
+ <rect x="-6" y="-6" width="${W+12}" height="${H+12}" rx="32" fill="#1c1b18"/><image href="img/${s.img}.jpg" width="${W}" height="${H}" clip-path="url(#c-${s.id})"/>${m}</svg>`}
+document.getElementById("steps").innerHTML=STEPS.map(s=>`<section class="step" id="${s.id}"><div class="fig">${fig(s)}</div><div><div class="k">${s.k}</div><h2>${s.h}</h2>
+ <ol class="marks">${s.marks.map(m=>`<li><span class="n">${m[0]}</span><div>${m[6]}</div></li>`).join("")}</ol>${s.extra||""}</div></section>`).join("");
+</script>
