@@ -96,6 +96,47 @@ textarea{width:100%;height:46vh;font:14px/1.6 ui-monospace,Menlo,monospace;borde
 </style>
 </head>
 <body>
+<!-- ===== Login gate (Google sign-in, @ahmadiyya.ca only). Switched off while GOOGLE_CLIENT_ID is empty. ===== -->
+<div id="gate" hidden style="position:fixed;inset:0;z-index:999;background:var(--bg);display:flex;align-items:center;justify-content:center;padding:24px">
+ <div style="max-width:360px;width:100%;text-align:center;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:28px 22px">
+  <div style="font-size:30px;font-weight:700;color:var(--brand)">Bayaz <span style="font-weight:400">بیاض</span></div>
+  <div style="color:var(--mute);margin:4px 0 20px">Nazam finder for murabbis</div>
+  <div style="margin-bottom:14px">Please sign in with your <b>@ahmadiyya.ca</b> email.</div>
+  <div id="gbtn" style="display:flex;justify-content:center;min-height:44px"></div>
+  <div id="gmsg" style="color:var(--warn);font-size:14px;margin-top:14px"></div>
+  <div style="color:var(--mute);font-size:12px;margin-top:18px">Only Jamaat accounts can open this app.</div>
+ </div>
+</div>
+<script>
+const GATE = {
+  GOOGLE_CLIENT_ID: "",               // paste the Google OAuth Client ID here to switch the login on
+  DOMAIN: "ahmadiyya.ca",
+  ALLOW: [],                           // extra individual emails allowed in, e.g. ["name@gmail.com"]
+  DAYS: 30                             // how long a sign-in lasts on a device
+};
+(function(){
+  if (!GATE.GOOGLE_CLIENT_ID) return;                       // login not switched on yet
+  const KEY = "bayaz_login", g = document.getElementById("gate"), msg = document.getElementById("gmsg");
+  let s = null; try { s = JSON.parse(localStorage.getItem(KEY)); } catch {}
+  if (s && s.until > Date.now()) { window.BAYAZ_USER = s.email; return; }   // still signed in (works offline too)
+  g.hidden = false; document.documentElement.style.overflow = "hidden";
+  const ok = e => e && (e.toLowerCase().endsWith("@" + GATE.DOMAIN) || GATE.ALLOW.map(x => x.toLowerCase()).includes(e.toLowerCase()));
+  window.bayazSignedIn = r => {
+    let p = {}; try { p = JSON.parse(decodeURIComponent(escape(atob(r.credential.split(".")[1].replace(/-/g, "+").replace(/_/g, "/"))))); } catch {}
+    if (p.aud !== GATE.GOOGLE_CLIENT_ID || !p.email_verified || !ok(p.email)) { msg.textContent = "This account can’t open Bayaz. Please use your @" + GATE.DOMAIN + " email."; return; }
+    try { localStorage.setItem(KEY, JSON.stringify({ email: p.email, until: Date.now() + GATE.DAYS * 864e5 })); } catch {}
+    window.BAYAZ_USER = p.email; g.hidden = true; document.documentElement.style.overflow = "";
+  };
+  const sc = document.createElement("script"); sc.src = "https://accounts.google.com/gsi/client"; sc.async = true;
+  sc.onload = () => {
+    google.accounts.id.initialize({ client_id: GATE.GOOGLE_CLIENT_ID, callback: window.bayazSignedIn, hd: GATE.ALLOW.length ? undefined : GATE.DOMAIN, ux_mode: "popup" });
+    google.accounts.id.renderButton(document.getElementById("gbtn"), { theme: "outline", size: "large", text: "signin_with", shape: "pill" });
+  };
+  sc.onerror = () => { msg.textContent = "You need to be online the first time you sign in."; };
+  document.head.appendChild(sc);
+  window.bayazSignOut = () => { try { localStorage.removeItem(KEY); } catch {} location.reload(); };
+})();
+</script>
 <header class="top">
   <div class="brand"><button class="hback" id="hb" hidden onclick="event.stopPropagation();history.length>1?history.back():location.hash=''">‹ Back</button><b onclick="location.hash=''">Bayaz</b><span onclick="location.hash=''">بیاض</span><small id="ver"></small><a class="hguide" href="guide/" onclick="event.stopPropagation()">Guide</a></div>
   <input id="q" type="search" placeholder="Search any word — Urdu, roman, English" autocomplete="off">
@@ -139,7 +180,7 @@ function list(){cur=null;$("#hb").hidden=true;const a=filtered();const th=Object
  ${S.theme?`<div class="notice ok">${esc(D.themes[S.theme])}</div>`:""}
  <div class="count">${a.length} nazam${a.length===1?"":"s"}</div>
  ${a.slice(0,400).map(card).join("")||"<p>No nazam matches.</p>"}
- <div class="about"><b>About Bayaz.</b> A notebook of nazams of the Ahmadiyya Muslim Community for choosing nazams and couplets for an ijlas. Recordings and sung lines are from alislam.org/nazms; book texts and official translations are from the Al Islam Digital Library. Translations marked “unofficial” are drafts and must be checked before presenting or publishing. Theme tags are a first pass. Data built ${esc(D.built)}.</div>`;
+ <div class="about"><b>About Bayaz.</b> A notebook of nazams of the Ahmadiyya Muslim Community for choosing nazams and couplets for an ijlas. Recordings and sung lines are from alislam.org/nazms; book texts and official translations are from the Al Islam Digital Library. Translations marked “unofficial” are drafts and must be checked before presenting or publishing. Theme tags are a first pass. Data built ${esc(D.built)}.${window.BAYAZ_USER?` <br>Signed in as ${esc(window.BAYAZ_USER)} · <a href="#" onclick="bayazSignOut();return false">Sign out</a>`:""}</div>`;
  document.querySelectorAll("[data-th]").forEach(b=>b.onclick=()=>{S.theme=b.dataset.th;list()});
  document.querySelectorAll("[data-po]").forEach(b=>b.onclick=()=>{S.poet=b.dataset.po;list()});
  $("#fp").onchange=e=>{S.poet=e.target.value;list()};$("#fl").onchange=e=>{S.lang=e.target.value;list()};$("#fv").onchange=e=>{S.level=e.target.value;list()};$("#fs").onchange=e=>{S.sort=e.target.value;list()};
